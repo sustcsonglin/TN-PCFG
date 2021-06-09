@@ -1,11 +1,11 @@
 # TN-PCFG
 
-source code of  NAACL2021 "PCFGs Can Do Better: Inducing Probabilistic Context-Free Grammars with Many Symbols" and ACL2021 main conference: "Neural Bilexicalized PCFG Induction"
+source code of  NAACL2021 [PCFGs Can Do Better: Inducing Probabilistic Context-Free Grammars with Many Symbols](https://www.aclweb.org/anthology/2021.naacl-main.117.pdf) and ACL2021 [Neural Bi-Lexicalzied PCFG Induction](http://faculty.sist.shanghaitech.edu.cn/faculty/tukw/acl21pcfg.pdf).
 
 The repository also contain faster implementations of:
 
-- Compound (Neural PCFG): https://www.aclweb.org/anthology/P19-1228/
-- Neural Lexicalized PCFG: https://www.aclweb.org/anthology/2020.tacl-1.42/
+-  [Compound PCFG](https://www.aclweb.org/anthology/P19-1228/)
+-  [Neural Lexicalized PCFG](https://www.aclweb.org/anthology/2020.tacl-1.42/)
 
 
 
@@ -16,7 +16,7 @@ prepare environment
 ```
 conda create -n pcfg python=3.7
 conda activate pcfg
-while read requirement; do pip install $requirement; done < requirements.txt 
+while read requirement; do pip install $requirement; done < requirement.txt 
 ```
 
 prepare dataset
@@ -117,6 +117,8 @@ If these codes help you, plz cite our paper:
     abstract = "Probabilistic context-free grammars (PCFGs) with neural parameterization have been shown to be effective in unsupervised phrase-structure grammar induction. However, due to the cubic computational complexity of PCFG representation and parsing, previous approaches cannot scale up to a relatively large number of (nonterminal and preterminal) symbols. In this work, we present a new parameterization form of PCFGs based on tensor decomposition, which has at most quadratic computational complexity in the symbol number and therefore allows us to use a much larger number of symbols. We further use neural parameterization for the new form to improve unsupervised parsing performance. We evaluate our model across ten languages and empirically demonstrate the effectiveness of using more symbols.",
 }
 ```
+## Ack.
+We use [fastNLP](https://github.com/fastnlp/fastNLP) and the code template of [Supar](https://github.com/yzhangcs/parser)
 
 
 
