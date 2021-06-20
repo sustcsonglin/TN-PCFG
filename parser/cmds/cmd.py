@@ -39,7 +39,7 @@ class CMD(object):
         metric_ll = LikelihoodMetric()
         t = tqdm(loader, total=int(len(loader)),  position=0, leave=True)
         print('decoding mode:{}'.format(decode_type))
-        print('evaluate_dep:{]'.format(eval_dep))
+        print('evaluate_dep:{}'.format(eval_dep))
         for x, y in t:
             result = model.evaluate(x, decode_type=decode_type, eval_dep=eval_dep)
             metric_f1(result['prediction'], y['gold_tree'])
