@@ -21,7 +21,7 @@ while read requirement; do pip install $requirement; done < requirement.txt
 
 prepare dataset
 
-You can download the dataset from:  https://mega.nz/folder/OU5yiTjC#oeMYj1gBhqm2lRAdAvbOvw
+You can download the dataset and pretrained model (TN-PCFG and NBL-PCFG) from:  https://mega.nz/folder/OU5yiTjC#oeMYj1gBhqm2lRAdAvbOvw
 
 PTB:  ptb_cleaned.zip / CTB and SPRML: ctb_sprml_clean.zip
 
