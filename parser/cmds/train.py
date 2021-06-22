@@ -63,6 +63,7 @@ class Train(CMD):
             # save the model if it is the best so far
             if dev_ll > best_metric:
                 best_metric = dev_ll 
+                best_e = epoch
                 torch.save(
                    obj=self.model.state_dict(),
                    f = args.save_dir + "/best.pt"
