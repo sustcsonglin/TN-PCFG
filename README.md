@@ -1,4 +1,4 @@
-# TN-PCFG
+# TN-PCFG and NBL-PCFG
 
 source code of  NAACL2021 [PCFGs Can Do Better: Inducing Probabilistic Context-Free Grammars with Many Symbols](https://www.aclweb.org/anthology/2021.naacl-main.117.pdf) and ACL2021 [Neural Bi-Lexicalzied PCFG Induction](http://faculty.sist.shanghaitech.edu.cn/faculty/tukw/acl21pcfg.pdf).
 
