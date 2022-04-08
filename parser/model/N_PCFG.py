@@ -54,9 +54,7 @@ class NeuralPCFG(nn.Module):
                 b, n, self.T, self.s_dim
             )
             term_prob = self.term_mlp(term_emb).log_softmax(-1)
-            indices = x.unsqueeze(2).expand(b, n, self.T).unsqueeze(3)
-            term_prob = torch.gather(term_prob, 3, indices).squeeze(3)
-            return term_prob
+            return term_prob[torch.arange(self.T)[None,None], x[:, :, None]]
 
         def rules():
             rule_prob = self.rule_mlp(self.nonterm_emb).log_softmax(-1)

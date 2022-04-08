@@ -1,6 +1,9 @@
 # TN-PCFG and NBL-PCFG
 
-source code of  NAACL2021 [PCFGs Can Do Better: Inducing Probabilistic Context-Free Grammars with Many Symbols](https://www.aclweb.org/anthology/2021.naacl-main.117.pdf) and ACL2021 [Neural Bi-Lexicalzied PCFG Induction](http://faculty.sist.shanghaitech.edu.cn/faculty/tukw/acl21pcfg.pdf).
+source code of  
+- NAACL2021 [PCFGs Can Do Better: Inducing Probabilistic Context-Free Grammars with Many Symbols](https://www.aclweb.org/anthology/2021.naacl-main.117.pdf) 
+- ACL2021 [Neural Bi-Lexicalzied PCFG Induction](http://faculty.sist.shanghaitech.edu.cn/faculty/tukw/acl21pcfg.pdf).
+- NAACL2022 [Dynamic Programming in Rank Space: Scaling Structured Inference with Low-Rank HMMs and PCFGs](https://openreview.net/forum?id=KBpfIEHa9Th).
 
 The repository also contain faster implementations of:
 
@@ -8,6 +11,10 @@ The repository also contain faster implementations of:
 -  [Neural Lexicalized PCFG](https://www.aclweb.org/anthology/2020.tacl-1.42/)
 
 
+## News
+- 22/04: Our paper [Dynamic Programming in Rank Space: Scaling Structured Inference with Low-Rank HMMs and PCFGs](https://openreview.net/forum?id=KBpfIEHa9Th) has been accepted to NAACL2022.
+
+- 22/04: We highly optimize the implementation of the inside algorithms of TN-PCFG and NBL-PCFG.      
 
 ## Setup
 
@@ -80,9 +87,6 @@ log/
 
 python evaluate.py --load_from_dir log/NBLPCFG2021-01-26-07_47_29  --decode_type mbr --eval_dep 1 
 
-## Out-of-memory
-
-If you encounter OOM, you should adjust the batch size in the yaml file. Normally, for GPUs with 12GB memory, batch size=4~8 is ok, while for evaluation of NBL-PCFGs, you should set a smaller batch size (1 or 2).  
 
 ## Contact
 
@@ -93,13 +97,20 @@ If you have any question, plz contact bestsonta@gmail.com.
 If these codes help you, plz cite our paper:
 
 ```
-@misc{yang2021neural,
-      title={Neural Bi-Lexicalized PCFG Induction}, 
-      author={Songlin Yang and Yanpeng Zhao and Kewei Tu},
-      year={2021},
-      eprint={2105.15021},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+@inproceedings{yang-etal-2021-neural,
+    title = "Neural Bi-Lexicalized {PCFG} Induction",
+    author = "Yang, Songlin  and
+      Zhao, Yanpeng  and
+      Tu, Kewei",
+    booktitle = "Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers)",
+    month = aug,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.acl-long.209",
+    doi = "10.18653/v1/2021.acl-long.209",
+    pages = "2688--2699",
+    abstract = "Neural lexicalized PCFGs (L-PCFGs) have been shown effective in grammar induction. However, to reduce computational complexity, they make a strong independence assumption on the generation of the child word and thus bilexical dependencies are ignored. In this paper, we propose an approach to parameterize L-PCFGs without making implausible independence assumptions. Our approach directly models bilexical dependencies and meanwhile reduces both learning and representation complexities of L-PCFGs. Experimental results on the English WSJ dataset confirm the effectiveness of our approach in improving both running speed and unsupervised parsing performance.",
 }
 
 @inproceedings{yang-etal-2021-pcfgs,

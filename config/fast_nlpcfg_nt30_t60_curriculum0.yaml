@@ -1,0 +1,45 @@
+device: 0
+save_dir : 'log'
+
+
+data:
+  train_file: 'data/ptb-train-lpcfg.pickle'
+  val_file: 'data/ptb-val-lpcfg.pickle'
+  test_file: 'data/ptb-test-lpcfg.pickle'
+  vocab_type: 'max_size'
+  vocab_size: 10000
+  min_freq: 2
+
+model:
+  model_name: 'FastNLPCFG'
+  NT: 30
+  T: 60
+  s_dim: 256
+
+train:
+  max_tokens: 100
+  batch_size: 4
+  max_epoch: 10
+  max_len: 40
+  #whether to use curriculum learning stragegy.
+  curriculum: 0
+  start_len: 10
+  increment: 30
+  patience: 5
+  clip: 3
+
+
+test:
+  batch_size: 4
+  max_tokens: 500
+  bucket: 32
+  decode: 'mbr'
+  sampler: 'batch'
+
+
+optimizer:
+  name: 'adam'
+  lr: 0.001
+  mu: 0.75
+  nu: 0.999
+

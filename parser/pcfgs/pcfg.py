@@ -102,3 +102,5 @@ class PCFG(PCFG_base):
 
         else:
             return {'partition': logZ}
+
+

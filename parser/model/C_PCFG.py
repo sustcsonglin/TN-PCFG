@@ -100,9 +100,7 @@ class CompoundPCFG(nn.Module):
             z_expand = z_expand.unsqueeze(2).expand(b, n, self.T, self.z_dim)
             term_emb = torch.cat([term_emb, z_expand], -1)
             term_prob = self.term_mlp(term_emb).log_softmax(-1)
-            indices = x.unsqueeze(2).expand(b, n, self.T).unsqueeze(3)
-            term_prob = torch.gather(term_prob, 3, indices).squeeze(3)
-            return term_prob
+            return term_prob[torch.arange(self.T)[None,None], x[:, :, None]]
 
         def rules():
             nonterm_emb = self.nonterm_emb.unsqueeze(0).expand(

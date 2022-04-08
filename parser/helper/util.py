@@ -3,7 +3,7 @@ import os
 import logging
 from distutils.dir_util import copy_tree
 
-from parser.model import NeuralPCFG, CompoundPCFG, TNPCFG, NeuralBLPCFG, NeuralLPCFG
+from parser.model import NeuralPCFG, CompoundPCFG, TNPCFG, NeuralBLPCFG, NeuralLPCFG, FastTNPCFG, FastNBLPCFG
 
 import torch
 
@@ -24,6 +24,13 @@ def get_model(args, dataset):
 
     elif args.model_name == 'NBLPCFG':
         return NeuralBLPCFG(args, dataset).to(dataset.device)
+
+    elif args.model_name == 'FastTNPCFG':
+        return FastTNPCFG(args, dataset).to(dataset.device)
+
+    elif args.model_name == 'FastNBLPCFG':
+        return FastNBLPCFG(args, dataset).to(dataset.device)
+
 
     else:
         raise KeyError

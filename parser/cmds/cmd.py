@@ -24,7 +24,7 @@ class CMD(object):
                 nn.utils.clip_grad_norm_(self.model.parameters(),
                                      train_arg.clip)
             self.optimizer.step()
-
+            t.set_postfix(loss=loss.item())
         return
 
 
