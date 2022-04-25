@@ -103,7 +103,7 @@ class PCFG(PCFG_base):
             return {'partition': logZ}
 
 
-class Faster_PCFG():
+class Faster_PCFG(PCFG_base):
     @torch.enable_grad()
     def _inside(self, rules, lens, viterbi=False, mbr=False):
         assert viterbi == False
