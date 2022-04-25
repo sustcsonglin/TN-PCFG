@@ -14,8 +14,8 @@ The repository also contain faster implementations of:
 ## News
 - 22/04: Our paper [Dynamic Programming in Rank Space: Scaling Structured Inference with Low-Rank HMMs and PCFGs](https://openreview.net/forum?id=KBpfIEHa9Th) has been accepted to NAACL2022.
 
-- 22/04: We highly optimize the implementation of the inside algorithms of TN-PCFG and NBL-PCFG.      
-
+- 22/04: We highly optimize the implementation of the inside algorithms. We leverage the [log-einsum-exp trick](https://arxiv.org/abs/2004.06231) to avoid expensive logsumexp operations.
+           
 ## Setup
 
 prepare environment 
