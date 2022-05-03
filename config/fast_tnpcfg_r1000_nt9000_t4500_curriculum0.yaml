@@ -25,7 +25,7 @@ model:
   shared: 0
 
 train:
-  batch_size: 8
+  batch_size: 16
   max_epoch: 10
   max_len: 40
 
