@@ -47,9 +47,6 @@ class TNPCFG(nn.Module):
 
         def terms():
             term_prob = self.term_mlp(self.term_emb).log_softmax(-1)
-            term_prob = term_prob.unsqueeze(0).unsqueeze(1).expand(
-                b, n, self.T, self.V
-            )
             return term_prob[torch.arange(self.T)[None,None], x[:, :, None]]
 
         def rules():

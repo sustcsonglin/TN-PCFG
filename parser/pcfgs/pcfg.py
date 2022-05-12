@@ -112,6 +112,7 @@ class Faster_PCFG(PCFG_base):
         rule = rules['rule']
         root = rules['root']
 
+
         batch, N, T = terms.shape
         N += 1
         NT = rule.shape[1]
