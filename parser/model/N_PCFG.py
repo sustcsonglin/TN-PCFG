@@ -1,10 +1,12 @@
 import torch
 import torch.nn as nn
 from parser.modules.res import ResLayer
+from ..pcfgs.pcfg import PCFG
 
 class NeuralPCFG(nn.Module):
     def __init__(self, args, dataset):
         super(NeuralPCFG, self).__init__()
+        self.pcfg = PCFG()
         self.device = dataset.device
         self.args = args
 
@@ -50,10 +52,10 @@ class NeuralPCFG(nn.Module):
             return roots.expand(b, self.NT)
 
         def terms():
-            term_emb = self.term_emb.unsqueeze(0).unsqueeze(1).expand(
-                b, n, self.T, self.s_dim
+            term_prob = self.term_mlp(self.term_emb).log_softmax(-1)
+            term_prob = term_prob.unsqueeze(0).unsqueeze(1).expand(
+                b, n, self.T, self.V
             )
-            term_prob = self.term_mlp(term_emb).log_softmax(-1)
             return term_prob[torch.arange(self.T)[None,None], x[:, :, None]]
 
         def rules():
