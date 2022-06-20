@@ -3,7 +3,8 @@
 source code of  
 - NAACL2021 [PCFGs Can Do Better: Inducing Probabilistic Context-Free Grammars with Many Symbols](https://www.aclweb.org/anthology/2021.naacl-main.117.pdf) 
 - ACL2021 [Neural Bi-Lexicalzied PCFG Induction](http://faculty.sist.shanghaitech.edu.cn/faculty/tukw/acl21pcfg.pdf).
-- NAACL2022 [Dynamic Programming in Rank Space: Scaling Structured Inference with Low-Rank HMMs and PCFGs (https://faculty.sist.shanghaitech.edu.cn/faculty/tukw/naacl22rank.pdf).
+- NAACL2022 [Dynamic Programming in Rank Space: Scaling Structured Inference with Low-Rank HMMs and PCFGs 
+](https://faculty.sist.shanghaitech.edu.cn/faculty/tukw/naacl22rank.pdf).
 
 The repository also contain faster implementations of:
 
