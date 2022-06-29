@@ -93,14 +93,13 @@ class CompoundPCFG(nn.Module):
             return roots
 
         def terms():
-            term_emb = self.term_emb.unsqueeze(0).unsqueeze(1).expand(
-                b, n, self.T, self.s_dim
+            term_emb = self.term_emb.unsqueeze(0).expand(
+                b, self.T, self.s_dim
             )
-            z_expand = z.unsqueeze(1).expand(b, n, self.z_dim)
-            z_expand = z_expand.unsqueeze(2).expand(b, n, self.T, self.z_dim)
+            z_expand = z.unsqueeze(1).expand(b, self.T, self.z_dim)
             term_emb = torch.cat([term_emb, z_expand], -1)
             term_prob = self.term_mlp(term_emb).log_softmax(-1)
-            return term_prob[torch.arange(self.T)[None,None], x[:, :, None]]
+            return term_prob.gather(-1, x.unsqueeze(1).expand(b, self.T, x.shape[-1])).transpose(-1, -2)
 
         def rules():
             nonterm_emb = self.nonterm_emb.unsqueeze(0).expand(
