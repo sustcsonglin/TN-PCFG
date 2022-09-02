@@ -20,14 +20,14 @@ model:
   NT: 9000
   T: 4500
   r_dim: 1000
-  s_dim: 256
+  s_dim: 512
   word_emb_size: 200
   shared: 0
 
 train:
   batch_size: 16
   max_epoch: 10
-  max_len: 40
+  max_len: 400
 
   #whether to use curriculum learning stragegy.
   curriculum: 0
