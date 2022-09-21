@@ -19,8 +19,8 @@ class Train(CMD):
 
         dataset = DataModule(args)
         self.model = get_model(args.model, dataset)
-        log = get_logger(args)
         create_save_path(args)
+        log = get_logger(args)
         self.optimizer = get_optimizer(args.optimizer, self.model)
         log.info("Create the model")
         log.info(f"{self.model}\n")
