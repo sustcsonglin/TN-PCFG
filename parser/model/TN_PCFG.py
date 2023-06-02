@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 from parser.modules.res import ResLayer
-from ..pcfgs.tdpcfg import TDPCFG, Fastest_TDPCFG
+from ..pcfgs.tdpcfg import TDPCFG, Fastest_TDPCFG, Triton_TDPCFG
 
 class TNPCFG(nn.Module):
     def __init__(self, args, dataset):
@@ -91,7 +91,10 @@ class TNPCFG(nn.Module):
 class FastTNPCFG(nn.Module):
     def __init__(self, args, dataset):
         super(FastTNPCFG, self).__init__()
-        self.pcfg = Fastest_TDPCFG()
+        if args.use_triton:
+            self.pcfg = Triton_TDPCFG()
+        else:
+            self.pcfg = Fastest_TDPCFG()
         self.device = dataset.device
         self.args = args
         self.NT = args.NT

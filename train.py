@@ -18,8 +18,9 @@ if __name__ == '__main__':
     parser.add_argument('--device', '-d', default='0')
 
 
+
     args2 = parser.parse_args()
-    yaml_cfg = yaml.load(open(args2.conf, 'r'))
+    yaml_cfg = yaml.load(open(args2.conf, 'r'), Loader=yaml.Loader)
     args = edict(yaml_cfg)
     args.update(args2.__dict__)
 

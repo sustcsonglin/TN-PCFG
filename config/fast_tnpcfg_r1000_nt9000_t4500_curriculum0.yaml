@@ -23,6 +23,8 @@ model:
   s_dim: 512
   word_emb_size: 200
   shared: 0
+  use_triton: 1
+
 
 train:
   batch_size: 16

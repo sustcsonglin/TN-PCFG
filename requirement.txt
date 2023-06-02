@@ -136,3 +136,5 @@ wcwidth==0.2.5
 Werkzeug==1.0.1
 yarl==1.6.3
 zipp==3.4.0
+triton==2.0.0
+
