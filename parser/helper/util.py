@@ -5,6 +5,10 @@ from distutils.dir_util import copy_tree
 
 from parser.model import NeuralPCFG, CompoundPCFG, TNPCFG, NeuralBLPCFG, NeuralLPCFG, FastTNPCFG, FastNBLPCFG
 
+from parser.model.simple_C_PCFG import Simple_C_PCFG
+from parser.model.simple_N_PCFG import Simple_N_PCFG
+
+
 import torch
 
 
@@ -14,6 +18,12 @@ def get_model(args, dataset):
 
     elif args.model_name == 'CPCFG':
         return CompoundPCFG(args, dataset).to(dataset.device)
+
+    elif args.model_name == 'simple_CPCFG':
+        return Simple_C_PCFG(args, dataset).to(dataset.device)
+
+    elif args.model_name == 'simple_NPCFG':
+        return Simple_N_PCFG(args, dataset).to(dataset.device)
 
     elif args.model_name == 'TNPCFG':
         return TNPCFG(args, dataset).to(dataset.device)
