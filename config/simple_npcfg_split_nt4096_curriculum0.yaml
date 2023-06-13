@@ -10,9 +10,11 @@ data:
   min_freq: 2
 
 
+
+
 model:
-  model_name: 'simple_NPCFG'
-  NT: 4096
+  model_name: 'simple_NPCFG_split'
+  NT: 1024
   T: 8192
   s_dim: 512
   w_dim: 512
@@ -22,12 +24,12 @@ model:
 
 train:
   batch_size: 16
-  max_epoch: 10
+  max_epoch: 20
   max_len: 40
   #whether to use curriculum learning stragegy.
   curriculum: 1
   start_len: 30
-  increment: 1
+  increment: 0
   patience: 5
   clip: 3
 
@@ -43,5 +45,8 @@ optimizer:
   lr: 0.002
   mu: 0.99
   nu: 0.999
+
+
+
 
 

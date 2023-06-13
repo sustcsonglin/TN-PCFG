@@ -15,6 +15,7 @@ data:
   vocab_size: 10000
   min_freq: 2
 
+
 model:
   model_name: 'FastTNPCFG'
   NT: 9000

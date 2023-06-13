@@ -11,23 +11,25 @@ data:
 
 
 model:
-  model_name: 'simple_NPCFG'
-  NT: 4096
-  T: 8192
+  model_name: 'arpcfg'
+  NT: 32
+  T: 64
   s_dim: 512
   w_dim: 512
   h_dim: 512
   z_dim: 64
 
 
+
+
 train:
   batch_size: 16
-  max_epoch: 10
+  max_epoch: 20
   max_len: 40
   #whether to use curriculum learning stragegy.
   curriculum: 1
   start_len: 30
-  increment: 1
+  increment: 0
   patience: 5
   clip: 3
 
@@ -43,5 +45,8 @@ optimizer:
   lr: 0.002
   mu: 0.99
   nu: 0.999
+
+
+
 
 

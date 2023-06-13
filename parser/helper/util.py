@@ -7,6 +7,8 @@ from parser.model import NeuralPCFG, CompoundPCFG, TNPCFG, NeuralBLPCFG, NeuralL
 
 from parser.model.simple_C_PCFG import Simple_C_PCFG
 from parser.model.simple_N_PCFG import Simple_N_PCFG
+from parser.model.simple_N_PCFG_split import Simple_N_PCFG_split
+from parser.model.autoregressive_PCFG import Autoregressive_PCFG
 
 
 import torch
@@ -25,8 +27,14 @@ def get_model(args, dataset):
     elif args.model_name == 'simple_NPCFG':
         return Simple_N_PCFG(args, dataset).to(dataset.device)
 
+    elif args.model_name == 'simple_NPCFG_split':
+        return Simple_N_PCFG_split(args, dataset).to(dataset.device)
+
     elif args.model_name == 'TNPCFG':
         return TNPCFG(args, dataset).to(dataset.device)
+
+    elif args.model_name == 'arpcfg':
+        return Autoregressive_PCFG(args, dataset).to(dataset.device)
 
 
     elif args.model_name == 'NLPCFG':
@@ -40,7 +48,6 @@ def get_model(args, dataset):
 
     elif args.model_name == 'FastNBLPCFG':
         return FastNBLPCFG(args, dataset).to(dataset.device)
-
 
     else:
         raise KeyError
