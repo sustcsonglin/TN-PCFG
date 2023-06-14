@@ -33,14 +33,18 @@ class Train(CMD):
         '''
         Training
         '''
+        
         train_arg = args.train
         self.train_arg = train_arg
+        # eval_loader_autodevice = DataPrefetcher(eval_loader, device=self.device)
+        # dev_f1_metric, dev_ll = self.evaluate(eval_loader_autodevice)
+        # log.info(f"{'dev f1:':6}   {dev_f1_metric}")
+        # log.info(f"{'dev ll:':6}   {dev_ll}")
 
         for epoch in range(1, train_arg.max_epoch + 1):
             '''
             Auto .to(self.device)
             '''
-
             # curriculum learning. Used in compound PCFG.
             if train_arg.curriculum:
                 train_loader = dataset.train_dataloader(max_len=min(train_arg.start_len + epoch - 1, train_arg.max_len))
@@ -52,7 +56,6 @@ class Train(CMD):
             start = datetime.now()
             self.train(train_loader_autodevice)
             log.info(f"Epoch {epoch} / {train_arg.max_epoch}:")
-
 
             dev_f1_metric, dev_ll = self.evaluate(eval_loader_autodevice)
             log.info(f"{'dev f1:':6}   {dev_f1_metric}")

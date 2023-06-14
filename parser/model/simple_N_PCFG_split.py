@@ -64,13 +64,10 @@ class Simple_N_PCFG_split(nn.Module):
         x = input['word']
         b, n = x.shape[:2]
 
-
-
         def roots():
             roots = (self.root_emb  @ self.rule_state_emb.t())
             roots = roots.log_softmax(-1)
             return roots.expand(b, roots.shape[-1])
-
 
         def terms():
             term_emb = self.rule_state_emb
