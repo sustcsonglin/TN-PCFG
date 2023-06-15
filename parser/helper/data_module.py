@@ -8,16 +8,115 @@ from torch.utils.data import Sampler
 from collections import defaultdict
 import os
 import random
+import itertools
+from transformers import GPT2Model, GPT2Tokenizer
+import pdb
+
+
 class DataModule():
     def __init__(self, hparams):
         super().__init__()
-
         self.hparams = hparams
         self.device = self.hparams.device
-        self.setup()
+        self.setup_gpt2()
 
     def prepare_data(self):
         pass
+    
+    def setup_gpt2(self):
+        data = self.hparams.data        
+        if os.path.exists(data.cache_gpt2_path):
+            with open(data.cache_gpt2_path, 'rb') as f:
+                cache = pickle.load(f)
+                train_dataset = cache['train_dataset']
+                val_dataset = cache['val_dataset']
+                test_dataset = cache['test_dataset']
+            print("cache loaded")
+            
+        else:
+            train_dataset = DataSet()
+            val_dataset = DataSet()
+            test_dataset = DataSet()
+
+            train_data = pickle.load(open(data.train_file, "rb"))
+            val_data = pickle.load(open(data.val_file, "rb"))
+            test_data = pickle.load(open(data.test_file, "rb"))
+
+            train_dataset.add_field("word", train_data["word"])
+            val_dataset.add_field("word", val_data["word"])
+            test_dataset.add_field("word", test_data["word"])
+
+            gpt_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+
+            def tokenize(orig_tokens):
+                bpe_tokens_list = [gpt_tokenizer.tokenize(token) for token in orig_tokens]
+                bpe_tokens = list(itertools.chain(*bpe_tokens_list))
+                return bpe_tokens
+
+            train_dataset.apply_field(tokenize, "word", new_field_name="bpe")
+            val_dataset.apply_field(tokenize, "word", new_field_name="bpe")
+            test_dataset.apply_field(tokenize, "word", new_field_name="bpe")
+
+            print("Done tokenize")
+
+            def bpe2id(bpe_tokens):
+                return gpt_tokenizer.convert_tokens_to_ids(bpe_tokens)
+
+            train_dataset.apply_field(bpe2id, "bpe", new_field_name="bpe_id")
+            val_dataset.apply_field(bpe2id, "bpe", new_field_name="bpe_id")
+            test_dataset.apply_field(bpe2id, "bpe", new_field_name="bpe_id")
+
+            print("Done to id")
+
+            def chunk_encoding(orig_tokens):
+                """Begining and Inside encoding schema"""
+                bpe_tokens = [gpt_tokenizer.tokenize(token) for token in orig_tokens]
+                chunk_encoding = []
+                for bpe in bpe_tokens:
+                    chunk = [1] + [0] * (len(bpe) - 1)
+                    chunk_encoding += chunk
+                return chunk_encoding
+            
+
+            train_dataset.apply_field(chunk_encoding, "word", new_field_name="chunk")
+            val_dataset.apply_field(chunk_encoding, "word", new_field_name="chunk")
+            test_dataset.apply_field(chunk_encoding, "word", new_field_name="chunk")
+            print("Done to chunk")
+
+            train_dataset.add_field("gold_tree", train_data["gold_tree"], padder=None, ignore_type=True)
+            val_dataset.add_field("gold_tree", val_data["gold_tree"], padder=None, ignore_type=True)
+            test_dataset.add_field("gold_tree", test_data["gold_tree"], padder=None, ignore_type=True)
+
+            train_dataset.add_seq_len(field_name="bpe", new_field_name="seq_len")
+            val_dataset.add_seq_len(field_name="bpe", new_field_name="seq_len")
+            test_dataset.add_seq_len(field_name="bpe", new_field_name="seq_len")
+
+            train_dataset.add_seq_len(field_name="word", new_field_name="word_len")
+            val_dataset.add_seq_len(field_name="word", new_field_name="word_len")
+            test_dataset.add_seq_len(field_name="word", new_field_name="word_len")
+            
+            to_cache = {
+                'train_dataset': train_dataset,
+                'val_dataset': val_dataset,
+                'test_dataset': test_dataset
+            }
+
+            with open(data.cache_gpt2_path, 'wb') as f:
+                pickle.dump(to_cache, f)
+
+        # drop length 1 sentences. As S->NT, while NT cannot generate single word in our
+        # settings (only preterminals generate words
+        self.val_dataset = val_dataset.drop(lambda x: x["seq_len"] == 1, inplace=True)
+        self.train_dataset = train_dataset.drop(lambda x: x["seq_len"] == 1, inplace=True)
+        self.test_dataset = test_dataset.drop(lambda x: x["seq_len"] == 1, inplace=True)
+
+        self.train_dataset.set_input("bpe_id", "chunk", "word_len", "seq_len", "bpe")
+        self.val_dataset.set_input("bpe_id", "chunk", "word_len", "seq_len", "bpe")
+        self.test_dataset.set_input("bpe_id", "chunk", "word_len", "seq_len", "bpe")
+
+        self.val_dataset.set_target("gold_tree")
+        self.test_dataset.set_target("gold_tree")
+
 
     def setup(self):
         data = self.hparams.data

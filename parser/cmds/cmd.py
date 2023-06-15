@@ -28,6 +28,7 @@ class CMD(object):
         return
 
 
+
     @torch.no_grad()
     def evaluate(self, loader, eval_dep=False, decode_type='mbr', model=None):
         if model == None:
@@ -41,7 +42,7 @@ class CMD(object):
         print('decoding mode:{}'.format(decode_type))
         print('evaluate_dep:{}'.format(eval_dep))
         for x, y in t:
-            result = model.evaluate(x, decode_type=decode_type, eval_dep=eval_dep)
+            result = model.evaluate(x, decode_type=decode_type)
             metric_f1(result['prediction'], y['gold_tree'])
             metric_ll(result['partition'], x['seq_len'])
             if eval_dep:

@@ -158,42 +158,45 @@ class Autoregressive_PCFG(nn.Module):
         with torch.no_grad():
             bos = torch.LongTensor(bs, 1).fill_(self.gpt2_tokenizer.bos_token_id).to(self.device)
             # eos = torch.LongTensor(bs, 1).fill_(self.gpt2_tokenizer.eos_token_id).to(self.device)            
-
             bpe = torch.cat([
                 bos, orig_bpe
             ], dim=-1)
-            
-            y = self.gpt2_model(bpe).logits[:, :-1, :]
+            #tempature 10..
+            y = self.gpt2_model(bpe).logits[:, :-1, :] 
             y = y.softmax(-1)
 
-        tmp = self.pcfg.marginal_next_preterminal(rules=rules, lens=input['seq_len'])
-        pcfg_next_preterminal_prob  = tmp['marginal']
 
-        # logZ = tmp['partition']
+        # tmp = self.pcfg.conclusion_1999_next_preterminal(rules=rules, lens=input['seq_len'])
+        # pcfg_next_preterminal_prob  = tmp['marginal']
+        tmp = self.pcfg.marginal_next_preterminal(rules=rules, lens=input['seq_len'])
+
+        pcfg_next_preterminal_prob = tmp['marginal']
+        logZ = tmp['partition']
+        
         # result =  self.pcfg._inside_triton(rules=rules, lens=input['seq_len'])
         # pdb.set_trace()
+
         all_emission_prob = rules['all_emission_prob']
-
         x = ((pcfg_next_preterminal_prob @ all_emission_prob.exp())+1e-9).log()
-        
-        # x = ((pcfg_next_preterminal_prob+1e-9).log()[...,None] + all_emission_prob[None, None,...] ).logsumexp(-2)
-
+        # x = ((pcfg_next_preterminal_prob+1e-9).log()[...,None] + all_emission_prob[None, None,...]).logsumexp(-2)
         kl_loss = y * x
-        
-        gold_loss = -x.gather(-1,orig_bpe.unsqueeze(-1)).sum([-2,-1]).mean()
-    
+        # gold_loss = -x.gather(-1,orig_bpe.unsqueeze(-1)).sum([-2,-1]).mean(
         # pdb.set_trace()        
         # pdb.set_trace()
-        return -kl_loss.sum([-1,-2]).mean() + gold_loss
-
+        return -kl_loss.sum(1).mean() - logZ.mean()
         # kl_loss = torch.kl_div()        
+
+
+
         
+
+
+    
         
 
     def loss(self, input):
         return  self.distill_kl_loss(input)
     
-
 
         rules = self.forward(input)
         # result =  self.pcfg._inside_triton(rules=rules, lens=input['seq_len'])

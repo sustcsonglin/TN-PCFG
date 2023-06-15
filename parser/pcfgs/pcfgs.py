@@ -10,11 +10,12 @@ class PCFG_base():
         return self._inside(rules, lens)
 
     @torch.enable_grad()
-    def decode(self, rules, lens, viterbi=False, mbr=False):
-        return self._inside(rules=rules, lens=lens, viterbi=viterbi, mbr=mbr)
+    def decode(self, rules, lens, viterbi=False, mbr=False, chunk=None):
+        return self._inside(rules=rules, lens=lens, viterbi=viterbi, mbr=mbr, chunk=chunk)
 
 
-    def _get_prediction(self, logZ, span_indicator, lens, mbr=False):
+    def _get_prediction(self, logZ, span_indicator, lens, mbr=False, chunk=None ):
+        chunks = chunk
         batch, seq_len = span_indicator.shape[:2]
         prediction = [[] for _ in range(batch)]
         # to avoid some trivial corner cases.
@@ -22,6 +23,13 @@ class PCFG_base():
             assert logZ.requires_grad
             logZ.sum().backward()
             marginals = span_indicator.grad
+            if chunks is not None:
+                assert len(chunk) == batch
+                for b_idx in range(batch):
+                    for chunk in chunks[b_idx]:
+                        marginals[b_idx, chunk[0], chunk[1]] = 1.0
+        
+
             if mbr:
                 return self._cky_zero_order(marginals.detach(), lens)
             else:

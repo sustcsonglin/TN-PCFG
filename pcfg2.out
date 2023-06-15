@@ -1,0 +1,68 @@
+Warning: Module fastNLP.models.seq2seq_model lacks `__doc__`
+Warning: Module fastNLP.models.seq2seq_model lacks `__doc__`
+Set the device with ID 0 visible
+cache loaded
+Hello there...
+loading gpt2...
+finish loading gpt2....
+Creating log/arpcfg/arpcfg2023-06-14-19_17_36
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False
+decoding mode:mbr
+evaluate_dep:False

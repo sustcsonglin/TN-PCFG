@@ -300,7 +300,10 @@ class Jelinek_Lafferty(PCFG_base):
         # (b, N-1)
         marginal = (pi[:, 0, 1:, :] + root.unsqueeze(1).unsqueeze(-2)).logsumexp(-1).softmax(-1)                
 
-        return {'marginal': marginal}
+        return {'marginal': marginal, 
+                'partition': (x.squeeze(1) + root).logsumexp(-1)
+ }
+ 
         
     @torch.enable_grad()
     def marginal_next_preterminal(self, rules, lens):
