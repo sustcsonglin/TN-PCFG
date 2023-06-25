@@ -4,3 +4,5 @@ test.py
 .idea/
 .history/
 call
+**/__pycache__/
+
