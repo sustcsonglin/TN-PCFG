@@ -1,0 +1,63 @@
+device: 0
+save_dir : 'log'
+
+data:
+  train_file: 'data/ptb-train.pickle'
+  val_file: 'data/ptb-val.pickle'
+  test_file: 'data/ptb-test.pickle'
+  use_cache: 0
+  cache: 0
+  vocab_cache: 'data/ptb-vocab.pickle'
+  train_dataset_cache: 'data/ptb-train-cache.pickle'
+  val_dataset_cache: 'data/ptb-val-cache.pickle'
+  test_dataset_cache: 'data/ptb-val-cache.pickle'
+  vocab_type: 'max_size'
+  vocab_size: 10000
+  min_freq: 2
+
+model:
+  model_name: 'FastTNPCFG'
+  NT: 9000
+  T: 4500
+  r_dim: 1000
+  s_dim: 512
+  word_emb_size: 200
+  shared: 0
+  use_triton: 1
+
+
+train:
+  batch_size: 16
+  max_epoch: 10
+  max_len: 400
+
+  #whether to use curriculum learning stragegy.
+  curriculum: 0
+  start_len: 20
+  increment: 10
+
+  patience: 5
+  clip: 3
+
+
+
+test:
+  batch_size: 16
+  max_tokens: 100
+  bucket: 32
+  # viterbi or mbr
+  decode: 'mbr'
+  # batch or token
+  sampler: 'batch'
+
+optimizer:
+  name: 'adam'
+  lr: 0.002
+  mu: 0.75
+  nu: 0.999
+
+
+
+
+
+

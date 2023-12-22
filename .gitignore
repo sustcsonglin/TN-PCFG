@@ -1,0 +1,11 @@
+__pycache__/
+.vscode/
+stripe_demo.py
+pcfg/run.slurm
+pcfg/ptb_cleand.zip
+pcfg/ptb_cleaned.zip
+pcfg.zip
+*.err
+*.out
+.history/
+data/

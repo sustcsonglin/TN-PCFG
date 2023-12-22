@@ -1,0 +1,53 @@
+2023-12-22 17:49:05,811 - INFO - {'device': 'cuda', 'save_dir': 'log/simple_npcfg_nt4096_t8192_curriculum0/SNPCFG2023-12-22-17_49_05', 'data': {'train_file': 'data/ptb-train.pickle', 'val_file': 'data/ptb-val.pickle', 'test_file': 'data/ptb-test.pickle', 'vocab_type': 'max_size', 'vocab_size': 10000, 'min_freq': 2}, 'model': {'model_name': 'SNPCFG', 'NT': 4096, 'T': 8192, 's_dim': 512, 'w_dim': 512, 'h_dim': 512, 'z_dim': 64, 'r_dim': -1, 'operation_space': 'normal', 'entropy': False}, 'train': {'batch_size': 16, 'max_epoch': 30, 'max_len': 40, 'curriculum': 0, 'start_len': 30, 'increment': 1, 'patience': 5, 'clip': 3}, 'test': {'batch_size': 16, 'max_tokens': 100, 'bucket': 32, 'decode': 'mbr', 'sampler': 'batch'}, 'optimizer': {'name': 'adam', 'lr': 0.002, 'mu': 0.75, 'nu': 0.999}, 'conf': 'config/simplepcfg/simple_npcfg_nt4096_t8192_curriculum0.yaml'}
+2023-12-22 17:49:05,812 - INFO - Create the model
+2023-12-22 17:49:05,812 - INFO - Simple_N_PCFG(
+  (term_mlp): Sequential(
+    (0): Linear(in_features=512, out_features=512, bias=True)
+    (1): ResLayer(
+      (linear): Sequential(
+        (0): Linear(in_features=512, out_features=512, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=512, out_features=512, bias=True)
+        (3): ReLU()
+      )
+    )
+    (2): ResLayer(
+      (linear): Sequential(
+        (0): Linear(in_features=512, out_features=512, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=512, out_features=512, bias=True)
+        (3): ReLU()
+      )
+    )
+    (3): ResLayer(
+      (linear): Sequential(
+        (0): Linear(in_features=512, out_features=512, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=512, out_features=512, bias=True)
+        (3): ReLU()
+      )
+    )
+  )
+  (left_mlp): Sequential(
+    (0): Linear(in_features=512, out_features=512, bias=True)
+    (1): ReLU()
+  )
+  (right_mlp): Sequential(
+    (0): Linear(in_features=512, out_features=512, bias=True)
+    (1): ReLU()
+  )
+  (parent_mlp1): Sequential(
+    (0): Linear(in_features=512, out_features=512, bias=True)
+    (1): ReLU()
+  )
+)
+
+2023-12-22 17:49:05,812 - INFO - Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.75, 0.999)
+    eps: 1e-08
+    lr: 0.002
+    weight_decay: 0
+)
+2023-12-22 17:49:05,812 - INFO - {'device': 'cuda', 'save_dir': 'log/simple_npcfg_nt4096_t8192_curriculum0/SNPCFG2023-12-22-17_49_05', 'data': {'train_file': 'data/ptb-train.pickle', 'val_file': 'data/ptb-val.pickle', 'test_file': 'data/ptb-test.pickle', 'vocab_type': 'max_size', 'vocab_size': 10000, 'min_freq': 2}, 'model': {'model_name': 'SNPCFG', 'NT': 4096, 'T': 8192, 's_dim': 512, 'w_dim': 512, 'h_dim': 512, 'z_dim': 64, 'r_dim': -1, 'operation_space': 'normal', 'entropy': False}, 'train': {'batch_size': 16, 'max_epoch': 30, 'max_len': 40, 'curriculum': 0, 'start_len': 30, 'increment': 1, 'patience': 5, 'clip': 3}, 'test': {'batch_size': 16, 'max_tokens': 100, 'bucket': 32, 'decode': 'mbr', 'sampler': 'batch'}, 'optimizer': {'name': 'adam', 'lr': 0.002, 'mu': 0.75, 'nu': 0.999}, 'conf': 'config/simplepcfg/simple_npcfg_nt4096_t8192_curriculum0.yaml'}
