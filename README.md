@@ -5,6 +5,7 @@ source code of
 - ACL2021 [Neural Bi-Lexicalzied PCFG Induction](http://faculty.sist.shanghaitech.edu.cn/faculty/tukw/acl21pcfg.pdf).
 - NAACL2022 [Dynamic Programming in Rank Space: Scaling Structured Inference with Low-Rank HMMs and PCFGs 
 ](https://faculty.sist.shanghaitech.edu.cn/faculty/tukw/naacl22rank.pdf).
+- EMNLP2023 Findings [Simple Hardware-Efficient PCFGs with Independent Left and Right Productions](https://aclanthology.org/2023.findings-emnlp.113.pdf)
 
 The repository also contain faster implementations of:
 
