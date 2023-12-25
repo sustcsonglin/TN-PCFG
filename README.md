@@ -14,13 +14,15 @@ The repository also contain faster implementations of:
 
 
 ## News
+- 23/12: We upload the [simple PCFG](https://aclanthology.org/2023.findings-emnlp.113.pdf)) code.
+
 - 22/04: Our paper [Dynamic Programming in Rank Space: Scaling Structured Inference with Low-Rank HMMs and PCFGs](https://openreview.net/forum?id=KBpfIEHa9Th) has been accepted to NAACL2022.
 
 - 22/04: We highly optimize the implementation of the inside algorithms. We leverage the [log-einsum-exp trick](https://arxiv.org/abs/2004.06231) to avoid expensive logsumexp operations.
            
 ## Setup
 
-prepare environment 
+setup environment 
 
 ```
 conda create -n pcfg python=3.7
@@ -95,10 +97,49 @@ python evaluate.py --load_from_dir log/NBLPCFG2021-01-26-07_47_29  --decode_type
 If you have any question, plz contact bestsonta@gmail.com. 
 
 ## Citation
+If you find this repository helpful, please cite our work.
 
-If these codes help you, plz cite our paper:
 
 ```
+@inproceedings{liu-etal-2023-simple,
+    title = "Simple Hardware-Efficient {PCFG}s with Independent Left and Right Productions",
+    author = "Liu, Wei  and
+      Yang, Songlin  and
+      Kim, Yoon  and
+      Tu, Kewei",
+    editor = "Bouamor, Houda  and
+      Pino, Juan  and
+      Bali, Kalika",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2023",
+    month = dec,
+    year = "2023",
+    address = "Singapore",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.findings-emnlp.113",
+    doi = "10.18653/v1/2023.findings-emnlp.113",
+    pages = "1662--1669",
+    abstract = "Scaling dense PCFGs to thousands of nonterminals via low-rank parameterizations of the rule probability tensor has been shown to be beneficial for unsupervised parsing. However, PCFGs scaled this way still perform poorly as a language model, and even underperform similarly-sized HMMs. This work introduces $\emph{SimplePCFG}$, a simple PCFG formalism with independent left and right productions. Despite imposing a stronger independence assumption than the low-rank approach, we find that this formalism scales more effectively both as a language model and as an unsupervised parser. We further introduce $\emph{FlashInside}$, a hardware IO-aware implementation of the inside algorithm for efficiently scaling simple PCFGs. Through extensive experiments on multiple grammar induction benchmarks, we validate the effectiveness of simple PCFGs over low-rank baselines.",
+}
+
+@inproceedings{yang-etal-2022-dynamic,
+    title = "Dynamic Programming in Rank Space: Scaling Structured Inference with Low-Rank {HMM}s and {PCFG}s",
+    author = "Yang, Songlin  and
+      Liu, Wei  and
+      Tu, Kewei",
+    editor = "Carpuat, Marine  and
+      de Marneffe, Marie-Catherine  and
+      Meza Ruiz, Ivan Vladimir",
+    booktitle = "Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+    month = jul,
+    year = "2022",
+    address = "Seattle, United States",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.naacl-main.353",
+    doi = "10.18653/v1/2022.naacl-main.353",
+    pages = "4797--4809",
+    abstract = "Hidden Markov Models (HMMs) and Probabilistic Context-Free Grammars (PCFGs) are widely used structured models, both of which can be represented as factor graph grammars (FGGs), a powerful formalism capable of describing a wide range of models. Recent research found it beneficial to use large state spaces for HMMs and PCFGs. However, inference with large state spaces is computationally demanding, especially for PCFGs. To tackle this challenge, we leverage tensor rank decomposition (aka. CPD) to decrease inference computational complexities for a subset of FGGs subsuming HMMs and PCFGs. We apply CPD on the factors of an FGG and then construct a new FGG defined in the rank space. Inference with the new FGG produces the same result but has a lower time complexity when the rank size is smaller than the state size. We conduct experiments on HMM language modeling and unsupervised PCFG parsing, showing better performance than previous work. Our code is publicly available at \url{https://github.com/VPeterV/RankSpace-Models}.",
+}
+
 @inproceedings{yang-etal-2021-neural,
     title = "Neural Bi-Lexicalized {PCFG} Induction",
     author = "Yang, Songlin  and
