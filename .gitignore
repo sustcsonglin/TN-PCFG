@@ -9,3 +9,4 @@ pcfg.zip
 *.out
 .history/
 data/
+log/
