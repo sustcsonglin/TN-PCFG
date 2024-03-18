@@ -25,7 +25,7 @@ The repository also contain faster implementations of:
 setup environment 
 
 ```
-conda create -n pcfg python=3.7
+conda create -n pcfg python=3.9
 conda activate pcfg
 while read requirement; do pip install $requirement; done < requirement.txt 
 ```
