@@ -14,7 +14,7 @@ The repository also contain faster implementations of:
 
 
 ## News
-- 23/12: We upload the [simple PCFG](https://aclanthology.org/2023.findings-emnlp.113.pdf)) code.
+- 23/12: We upload the [simple PCFG](https://aclanthology.org/2023.findings-emnlp.113.pdf) code.
 
 - 22/04: Our paper [Dynamic Programming in Rank Space: Scaling Structured Inference with Low-Rank HMMs and PCFGs](https://openreview.net/forum?id=KBpfIEHa9Th) has been accepted to NAACL2022.
 
@@ -32,7 +32,7 @@ while read requirement; do pip install $requirement; done < requirement.txt
 
 prepare dataset
 
-You can download the dataset and pretrained model (TN-PCFG and NBL-PCFG) from:  https://mega.nz/folder/OU5yiTjC#oeMYj1gBhqm2lRAdAvbOvw
+You can download the dataset and pretrained model (TN-PCFG and NBL-PCFG) from [Google Drive](https://drive.google.com/file/d/1npIpF9y61KBa-Ki7JgyyzK1cFpKl67Ls/view?usp=sharing)
 
 PTB:  ptb_cleaned.zip / CTB and SPRML: ctb_sprml_clean.zip
 
